@@ -1,0 +1,188 @@
+.dashboard-page {
+  min-height: 70vh;
+  padding: 45px 6%;
+  background: #f7f8fc;
+  color: #20243a;
+}
+
+.dashboard-header,
+.saved-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+}
+
+.dashboard-eyebrow {
+  color: #6258e8;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.dashboard-header h1 {
+  margin: 10px 0;
+  font-size: clamp(28px, 4vw, 38px);
+}
+
+.dashboard-header p {
+  color: #72768a;
+}
+
+.dashboard-logout,
+.saved-actions button {
+  padding: 10px 14px;
+  border: 1px solid #e0e2ed;
+  border-radius: 9px;
+  background: white;
+  color: #5148c9;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.dashboard-notice {
+  margin-top: 24px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #eeedff;
+  color: #5148c9;
+  font-size: 14px;
+}
+
+.dashboard-notice a {
+  color: inherit;
+  font-weight: 700;
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 30px 0 40px;
+}
+
+.dashboard-stats article,
+.saved-card,
+.saved-empty {
+  padding: 24px;
+  border: 1px solid #e8eaf2;
+  border-radius: 16px;
+  background: white;
+}
+
+.dashboard-stats span,
+.dashboard-stats strong {
+  display: block;
+}
+
+.dashboard-stats span {
+  color: #72768a;
+  font-size: 13px;
+}
+
+.dashboard-stats strong {
+  margin-top: 12px;
+  font-size: 30px;
+}
+
+.saved-heading {
+  margin-bottom: 20px;
+}
+
+.saved-heading h2 {
+  font-size: 21px;
+}
+
+.saved-heading a,
+.saved-actions a {
+  color: #5b55d9;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.saved-list {
+  display: grid;
+  gap: 15px;
+}
+
+.saved-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.saved-type {
+  color: #5b55d9;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.saved-card h3 {
+  margin: 9px 0;
+  font-size: 18px;
+}
+
+.saved-card p,
+.saved-card small {
+  color: #72768a;
+  font-size: 13px;
+}
+
+.saved-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.saved-empty {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.saved-empty-icon {
+  font-size: 38px;
+  color: #6258e8;
+}
+
+.saved-empty p {
+  color: #72768a;
+  line-height: 1.7;
+}
+
+.saved-empty a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 16px;
+  border-radius: 9px;
+  background: #6258e8;
+  color: white;
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .dashboard-page {
+    padding: 30px 5%;
+  }
+
+  .dashboard-header,
+  .saved-heading,
+  .saved-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dashboard-stats {
+    gap: 10px;
+  }
+
+  .dashboard-stats article {
+    padding: 16px;
+  }
+
+  .saved-actions {
+    margin-top: 8px;
+  }
+}

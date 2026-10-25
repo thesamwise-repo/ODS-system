@@ -1,8 +1,563 @@
-.navbar{
-    height:60 px;
-    display:flex;
-    padding:0 9%;
-    align-items:center;
-    background-color:white;
-    border-bottom:1px solid ;
+
+/* ==============================
+   1. DESIGN TOKENS
+   ============================== */
+
+:root {
+  --ods-primary: #4f5ff5;
+  --ods-primary-dark: #3546db;
+  --ods-text: #102044;
+  --ods-muted: #667797;
+  --ods-border: #e5ebf7;
+  --ods-glass: rgba(255, 255, 255, 0.84);
+  --ods-shadow: 0 12px 35px rgba(30, 55, 110, 0.10);
+}
+
+/* ==============================
+   2. HEADER + MAIN LAYOUT
+   ============================== */
+
+.ods-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+
+  background: var(--ods-glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-bottom: 1px solid rgba(220, 229, 246, 0.85);
+}
+
+.ods-navbar {
+  width: min(100% - 48px, 1260px);
+  min-height: 68px;
+  margin-inline: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+/* ==============================
+   3. BRAND / LOGO
+   ============================== */
+
+.ods-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+
+  color: var(--ods-text);
+  text-decoration: none;
+}
+
+.ods-brand-mark {
+  display: grid;
+  place-items: center;
+
+  width: 39px;
+  height: 39px;
+  color: var(--ods-primary);
+}
+
+.brand-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.ods-brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ods-brand-name {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  line-height: 1.1;
+}
+
+.ods-brand-tagline {
+  font-size: 10px;
+  color: var(--ods-muted);
+  letter-spacing: 0.2px;
+}
+
+/* ==============================
+   4. DESKTOP NAVIGATION
+   ============================== */
+
+.ods-desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  margin-inline: auto;
+}
+
+.ods-nav-link {
+  position: relative;
+  min-height: 68px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  padding: 0 2px;
+  border: 0;
+  background: transparent;
+
+  color: #344563;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition: color 180ms ease;
+}
+
+.ods-nav-link:hover,
+.ods-nav-link.active {
+  color: var(--ods-primary);
+}
+
+.ods-nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+
+  background: var(--ods-primary);
+  border-radius: 3px 3px 0 0;
+}
+
+.chevron-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform 180ms ease;
+}
+
+.chevron-icon.is-open {
+  transform: rotate(180deg);
+}
+
+/* ==============================
+   5. OPPORTUNITIES DROPDOWN
+   ============================== */
+
+.ods-dropdown {
+  position: relative;
+}
+
+.ods-dropdown-panel {
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 290px;
+  padding: 14px;
+
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid var(--ods-border);
+  border-radius: 16px;
+  box-shadow: var(--ods-shadow);
+
+  animation: ods-appear 160ms ease-out;
+}
+
+.ods-dropdown-heading {
+  padding: 8px 10px 14px;
+  border-bottom: 1px solid var(--ods-border);
+  margin-bottom: 7px;
+}
+
+.ods-dropdown-eyebrow {
+  color: var(--ods-primary);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.ods-dropdown-heading p {
+  margin: 5px 0 0;
+  color: var(--ods-muted);
+  font-size: 12px;
+}
+
+.ods-dropdown-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+
+  padding: 11px 10px;
+  border-radius: 9px;
+
+  color: var(--ods-text);
+  font-size: 13px;
+  text-decoration: none;
+
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.ods-dropdown-link:hover {
+  background: #f1f4ff;
+  color: var(--ods-primary);
+}
+
+.ods-dropdown-arrow {
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.ods-dropdown-link:hover .ods-dropdown-arrow {
+  opacity: 1;
+}
+
+.ods-dropdown-all {
+  display: block;
+  padding: 13px 10px 5px;
+  margin-top: 5px;
+  border-top: 1px solid var(--ods-border);
+
+  color: var(--ods-primary);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ==============================
+   6. RIGHT-SIDE ACTIONS
+   ============================== */
+
+.ods-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.ods-icon-button {
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ods-primary);
+  cursor: pointer;
+
+  transition: background 180ms ease;
+}
+
+.ods-icon-button svg,
+.ods-search-panel > svg {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+}
+
+.ods-icon-button:hover,
+.ods-icon-button.selected {
+  background: #edf0ff;
+}
+
+.ods-login-button,
+.ods-signup-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  min-height: 39px;
+  padding: 0 19px;
+  border-radius: 11px;
+
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.ods-login-button {
+  color: var(--ods-primary);
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid #d6ddff;
+}
+
+.ods-signup-button {
+  color: white;
+  background: linear-gradient(135deg, #6270ff, #4855e8);
+  border: 1px solid transparent;
+  box-shadow: 0 5px 14px rgba(79, 95, 245, 0.18);
+}
+
+.ods-signup-button:hover {
+  background: var(--ods-primary-dark);
+  transform: translateY(-1px);
+}
+
+.ods-login-button:hover {
+  background: #f1f3ff;
+}
+
+/* ==============================
+   7. SEARCH PANEL
+   ============================== */
+
+.ods-search-panel {
+  width: min(100% - 48px, 1260px);
+  margin: 0 auto 14px;
+  padding: 12px 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  background: white;
+  border: 1px solid var(--ods-border);
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(30, 55, 110, 0.06);
+}
+
+.ods-search-panel > svg {
+  color: var(--ods-primary);
+}
+
+.ods-search-panel input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+
+  color: var(--ods-text);
+  font: inherit;
+  font-size: 13px;
+}
+
+.ods-search-submit {
+  padding: 10px 17px;
+  border: 0;
+  border-radius: 9px;
+
+  background: var(--ods-primary);
+  color: white;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ==============================
+   8. MOBILE NAVIGATION
+   ============================== */
+
+.ods-mobile-toggle {
+  display: none;
+
+  width: 42px;
+  height: 42px;
+  place-items: center;
+
+  border: 1px solid var(--ods-border);
+  border-radius: 12px;
+  background: white;
+  color: var(--ods-text);
+  cursor: pointer;
+}
+
+.ods-mobile-toggle svg {
+  width: 22px;
+  height: 22px;
+}
+
+.ods-mobile-menu {
+  display: none;
+}
+
+.ods-mobile-submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  margin: 0 0 8px;
+  padding: 8px;
+  border-radius: 12px;
+  background: #f5f7ff;
+}
+
+.ods-mobile-submenu a {
+  padding: 10px 12px;
+  color: var(--ods-muted);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.ods-mobile-dropdown-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 13px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+
+  color: var(--ods-text);
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ods-mobile-signup {
+  margin-top: 6px;
+  background: var(--ods-primary) !important;
+  color: white !important;
+  text-align: center;
+}
+
+/* ==============================
+   9. KEYBOARD ACCESSIBILITY
+   ============================== */
+
+.ods-header a:focus-visible,
+.ods-header button:focus-visible,
+.ods-search-panel input:focus-visible {
+  outline: 3px solid rgba(79, 95, 245, 0.45);
+  outline-offset: 3px;
+}
+
+/* ==============================
+   10. RESPONSIVE BREAKPOINTS
+   ============================== */
+
+@media (max-width: 900px) {
+  .ods-navbar {
+    width: calc(100% - 36px);
+    gap: 18px;
+  }
+
+  .ods-desktop-nav {
+    gap: 19px;
+  }
+
+  .ods-actions {
+    gap: 7px;
+  }
+
+  .ods-login-button,
+  .ods-signup-button {
+    padding-inline: 13px;
+  }
+
+  .ods-brand-tagline {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .ods-navbar {
+    min-height: 66px;
+    gap: 12px;
+  }
+
+  .ods-brand-name {
+    font-size: 17px;
+  }
+
+  .ods-brand-mark {
+    width: 35px;
+    height: 35px;
+  }
+
+  .ods-desktop-nav,
+  .ods-actions {
+    display: none;
+  }
+
+  .ods-mobile-toggle {
+    display: grid;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
+  .ods-mobile-menu {
+    width: calc(100% - 36px);
+    max-width: 1260px;
+    margin: 0 auto 14px;
+    padding: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid var(--ods-border);
+    border-radius: 16px;
+    box-shadow: var(--ods-shadow);
+
+    animation: ods-appear 160ms ease-out;
+  }
+
+  .ods-mobile-menu > a {
+    padding: 13px 12px;
+    border-radius: 10px;
+
+    color: var(--ods-text);
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  .ods-mobile-menu > a:hover,
+  .ods-mobile-dropdown-trigger:hover {
+    background: #f1f4ff;
+  }
+
+  .ods-search-panel {
+    width: calc(100% - 36px);
+    gap: 8px;
+  }
+
+  .ods-search-submit {
+    padding-inline: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ods-header *,
+  .ods-header *::before,
+  .ods-header *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes ods-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

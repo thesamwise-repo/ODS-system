@@ -1,0 +1,287 @@
+.listing-page {
+  min-height: 70vh;
+  padding: 45px 6%;
+  background: #f7f8fc;
+  color: #20243a;
+  color-scheme: light;
+}
+
+.listing-intro {
+  max-width: 780px;
+  margin: 0 auto 38px;
+  text-align: center;
+}
+
+.listing-eyebrow {
+  color: #6258e8;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.listing-intro h1 {
+  margin: 14px 0;
+  font-size: clamp(30px, 4vw, 44px);
+  color: #20243a;
+}
+
+.filter-panel h2,
+.results-heading h2,
+.listing-card h3 {
+  color: #20243a;
+}
+
+.listing-intro p,
+.results-heading p {
+  color: #72768a;
+  line-height: 1.7;
+}
+
+.listing-search {
+  width: 100%;
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid #e0e2ed;
+  border-radius: 12px;
+  background: white;
+  color: #20243a;
+  font: inherit;
+}
+
+.listing-search::placeholder {
+  color: #72768a;
+  opacity: 1;
+}
+
+.listing-layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 28px;
+  max-width: 1250px;
+  margin: auto;
+  align-items: start;
+}
+
+.filter-panel,
+.listing-card,
+.no-results {
+  padding: 22px;
+  border: 1px solid #e8eaf2;
+  border-radius: 16px;
+  background: white;
+}
+
+.filter-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.filter-panel h2,
+.results-heading h2 {
+  margin: 0 0 8px;
+  font-size: 19px;
+}
+
+.filter-panel label {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.filter-panel select,
+.results-heading select {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #e0e2ed;
+  border-radius: 9px;
+  background: white;
+  color: #30344a;
+  font: inherit;
+}
+
+.clear-filters {
+  margin-top: 10px;
+  padding: 11px;
+  border: 1px solid #dcd9ff;
+  border-radius: 9px;
+  background: #f4f3ff;
+  color: #5148c9;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.results-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.results-heading p {
+  margin: 5px 0 0;
+  font-size: 13px;
+}
+
+.results-heading select {
+  max-width: 210px;
+}
+
+.listing-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.listing-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.listing-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.listing-company-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #eeedff;
+  color: #5148c9;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.listing-type {
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #f0efff;
+  color: #5148c9;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.listing-card h3 {
+  margin: 18px 0 6px;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.listing-organization {
+  margin: 0;
+  color: #72768a;
+  font-size: 13px;
+}
+
+.listing-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 16px 0;
+}
+
+.listing-tags span {
+  padding: 6px 9px;
+  border-radius: 7px;
+  background: #f5f6fa;
+  color: #62677b;
+  font-size: 11px;
+}
+
+.listing-description {
+  color: #62677b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.listing-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid #eeeeF5;
+}
+
+.listing-card-bottom strong,
+.listing-card-bottom small {
+  display: block;
+}
+
+.listing-card-bottom strong {
+  font-size: 14px;
+}
+
+.listing-card-bottom small {
+  margin-top: 6px;
+  color: #85899b;
+  font-size: 11px;
+}
+
+.details-link {
+  color: #5b55d9;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.details-link:hover {
+  text-decoration: underline;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #72768a;
+}
+
+@media (max-width: 900px) {
+  .listing-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filter-panel h2,
+  .clear-filters {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .listing-page {
+    padding: 30px 5%;
+  }
+
+  .listing-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .results-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .results-heading select {
+    max-width: none;
+  }
+
+  .listing-card-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
