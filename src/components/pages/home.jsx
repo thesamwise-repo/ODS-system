@@ -1,54 +1,52 @@
 
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { fetchOpportunities } from "../../services/opportunityService";
 import "./home.css";
 
 const categories = [
   {
     icon: "💼",
     title: "Internships",
+    type: "Internship",
     description: "Gain real-world experience and kickstart your career.",
   },
   {
     icon: "💻",
     title: "Hackathons",
+    type: "Hackathon",
     description: "Build projects, solve problems, and win prizes.",
   },
   {
     icon: "🎓",
     title: "Scholarships",
+    type: "Scholarship",
     description: "Find financial support for your education.",
   },
   {
     icon: "🏆",
     title: "Competitions",
+    type: "Competition",
     description: "Showcase your skills and stand out.",
   },
 ];
 
-const opportunities = [
-  {
-    type: "Internship",
-    title: "Software Engineering Intern",
-    organization: "Example Company",
-    location: "Remote",
-    deadline: "30 November",
-  },
-  {
-    type: "Hackathon",
-    title: "Build With AI",
-    organization: "Tech Community",
-    location: "Online",
-    deadline: "5 December",
-  },
-  {
-    type: "Scholarship",
-    title: "Merit-Based Scholarship",
-    organization: "Education Foundation",
-    location: "India",
-    deadline: "15 December",
-  },
-];
-
 function Home() {
+  const [opportunities, setOpportunities] = useState([]);
+
+  useEffect(() => {
+    let active = true;
+    fetchOpportunities()
+      .then((data) => {
+        if (active) setOpportunities(data.slice(0, 3));
+      })
+      .catch(() => {
+        if (active) setOpportunities([]);
+      });
+
+    return () => { active = false; };
+  }, []);
+
   return (
     <main className="home">
 
@@ -111,21 +109,21 @@ function Home() {
             <p>Find the right path for your goals.</p>
           </div>
 
-          <a href="/opportunities">View all →</a>
+          <Link to="/opportunities">View all →</Link>
         </div>
 
         <div className="category-grid">
           {categories.map((category) => (
-            <a
+            <Link
               className="category-card"
-              href={`/opportunities?category=${encodeURIComponent(category.title)}`}
+              to={`/opportunities?category=${encodeURIComponent(category.type)}`}
               key={category.title}
             >
               <div className="category-icon">{category.icon}</div>
               <h3>{category.title}</h3>
               <p>{category.description}</p>
               <span className="card-arrow">↗</span>
-            </a>
+            </Link>
           ))}
         </div>
       </section>
@@ -138,12 +136,12 @@ function Home() {
             <p>Discover opportunities worth exploring.</p>
           </div>
 
-          <a href="/opportunities">View all →</a>
+          <Link to="/opportunities">View all →</Link>
         </div>
 
         <div className="opportunity-grid">
           {opportunities.map((item) => (
-            <article className="opportunity-card" key={item.title}>
+            <article className="opportunity-card" key={item._id ?? item.id}>
               <span className="opportunity-type">{item.type}</span>
 
               <h3>{item.title}</h3>
@@ -151,17 +149,18 @@ function Home() {
 
               <div className="opportunity-details">
                 <p>📍 {item.location}</p>
-                <p>📅 Deadline: {item.deadline}</p>
+                <p>📅 Deadline: {item.deadline ? new Date(item.deadline).toLocaleDateString("en-IN") : "Not specified"}</p>
               </div>
 
-              <a
+              <Link
                 className="details-button"
-                href="/opportunities"
+                to={`/opportunities/${item._id ?? item.id}`}
               >
                 View Details →
-              </a>
+              </Link>
             </article>
           ))}
+          {!opportunities.length && <p>No opportunities are available right now.</p>}
         </div>
       </section>
 
